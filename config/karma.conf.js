@@ -1,10 +1,8 @@
-module.exports = function (config) {
-  config.set({
-    basePath: '../flaskular',
+module.exports = function(config){
+    config.set({
+    basePath : '../flaskular',
 
-    files: [
-      JASMINE,
-      JASMINE_ADAPTER,
+    files : [
       'static/lib/angular/angular.js',
       'static/lib/angular/angular-*.js',
       'test/lib/angular/angular-mocks.js',
@@ -12,13 +10,19 @@ module.exports = function (config) {
       'test/unit/**/*.js'
     ],
 
-    autoWatch: true,
+    autoWatch : true,
+    frameworks: ['jasmine'],
+    browsers : ['Chrome'],
+    plugins : [
+            "karma-junit-reporter",
+            "karma-chrome-launcher",
+            "karma-firefox-launcher",
+            "karma-jasmine"
+            ],
 
-    browsers: ['Chrome'],
-
-    junitReporter: {
+    junitReporter : {
       outputFile: 'test_out/unit.xml',
       suite: 'unit'
     }
-  });
-}
+
+})};
