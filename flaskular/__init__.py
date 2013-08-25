@@ -12,4 +12,3 @@ app.url_map.strict_slashes = False
 import flaskular.core
 import flaskular.models
 import flaskular.controllers
-
