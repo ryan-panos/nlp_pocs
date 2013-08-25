@@ -2,10 +2,12 @@
 
 /* Controllers */
 
-angular.module('myApp.controllers', []).
-  controller('MyCtrl1', [function() {
+angular.module('Flaskular.controllers', [])
+    .controller('HomeCtrl', [
+        function() {
 
-  }])
-  .controller('MyCtrl2', [function() {
+        }])
+    .controller('ContactCtrl', [
+        function() {
 
-  }]);
+        }]);

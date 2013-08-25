@@ -2,9 +2,15 @@
 
 
 // Declare app level module which depends on filters, and services
-angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'myApp.controllers']).
+angular.module('Flaskular', ['Flaskular.filters', 'Flaskular.services', 'Flaskular.directives', 'Flaskular.controllers']).
   config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/view1', {templateUrl: 'partials/partial1.html', controller: 'MyCtrl1'});
-    $routeProvider.when('/view2', {templateUrl: 'partials/partial2.html', controller: 'MyCtrl2'});
-    $routeProvider.otherwise({redirectTo: '/view1'});
+    $routeProvider.when('/', {
+            templateUrl: 'static/partials/home.html',
+            controller: 'HomeCtrl'});
+    $routeProvider.when('/about', {
+            templateUrl: 'static/partials/about.html'});
+    $routeProvider.when('/contact', {
+            templateUrl: 'static/partials/contact.html',
+            controller: 'ContactCtrl'});
+    $routeProvider.otherwise({redirectTo: '/404'});
   }]);
