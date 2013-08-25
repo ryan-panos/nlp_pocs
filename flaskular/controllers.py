@@ -24,7 +24,7 @@ session = api_manager.session
 @app.route('/about')
 @app.route('/contact')
 def basic_pages(**kwargs):
-    return render_template('index.html')
+    return send_file('static/index.html')
 
 # routing for CRUD-style endpoints
 # passes routing onto the angular frontend if the requested resource exists
@@ -41,7 +41,7 @@ def rest_pages(model_name, item_id=None):
         if item_id is None or session.query(
                 exists().where(
                     model_class.id == item_id)).scalar():
-            return render_template('index.html')
+            return send_file('static/index.html')
     abort(404)
 
 
@@ -55,4 +55,4 @@ def favicon():
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template('404.html'), 404
+    return send_file('static/index.html'), 404

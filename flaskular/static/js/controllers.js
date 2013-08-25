@@ -10,4 +10,8 @@ angular.module('Flaskular.controllers', [])
     .controller('ContactCtrl', [
         function() {
 
+        }])
+    .controller('FourOhFourCtrl', [
+        function() {
+
         }]);

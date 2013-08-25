@@ -16,6 +16,9 @@ angular.module('Flaskular', ['Flaskular.filters',
                  $routeProvider.when('/contact', {
                      templateUrl: 'static/partials/contact.html',
                      controller: 'ContactCtrl'});
+                 $routeProvider.when('/404', {
+                     templateUrl: 'static/partials/404.html',
+                     controller: 'FourOhFourCtrl'});
                  $routeProvider.otherwise({redirectTo: '/404'});
                  $locationProvider.html5Mode(true);
              }]);

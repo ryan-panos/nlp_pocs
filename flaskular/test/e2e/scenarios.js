@@ -44,4 +44,13 @@ describe('my app', function() {
         expect(element('.navbar-nav li.active a[href="/contact"]').count()).toEqual(1);
     });
   });
+
+  describe('404', function() {
+      it('should render the 404 partial with the right status', function() {
+          browser().navigateTo('/404-not-exist');
+          expect(browser().window().path()).toEqual('/404');
+          //not sure how to ensure the status code yet.
+          expect(element('[ng-view] h3:first').text()).toMatch(/404/);
+      });
+  });
 });
