@@ -9,7 +9,6 @@ from flaskular import app
 # routing for API endpoints (generated from the models designated as
 # API_MODELS)
 from flaskular.core import api_manager
-from flaskular.models import *
 
 
 for model_name in app.config['API_MODELS']:
