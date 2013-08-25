@@ -13,7 +13,7 @@ describe('my app', function() {
   describe('about', function() {
 
     beforeEach(function() {
-      browser().navigateTo('#/about');
+      browser().navigateTo('/about');
     });
 
 
@@ -22,7 +22,7 @@ describe('my app', function() {
         toMatch(/About Flaskular/);
     });
     it('should have the about tab selected.', function() {
-        expect(element('.navbar-nav li.active a[href="#/about"]').count()).toEqual(1);
+        expect(element('.navbar-nav li.active a[href="/about"]').count()).toEqual(1);
     });
 
   });
@@ -31,7 +31,7 @@ describe('my app', function() {
   describe('contact', function() {
 
     beforeEach(function() {
-      browser().navigateTo('#/contact');
+      browser().navigateTo('/contact');
     });
 
 
@@ -41,7 +41,7 @@ describe('my app', function() {
     });
 
     it('should have the contact tab selected.', function() {
-        expect(element('.navbar-nav li.active a[href="#/contact"]').count()).toEqual(1);
+        expect(element('.navbar-nav li.active a[href="/contact"]').count()).toEqual(1);
     });
   });
 });

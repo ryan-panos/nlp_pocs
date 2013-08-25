@@ -15,11 +15,11 @@ I've been removing those.
 ## What's included
 
 * Flask
-* Angular (from angular-seed)
 * Flask-SQLAlchemy
 * Bootstrap 3
 * flask-restless
-
+* Angular (from angular-seed)
+** HTML5 mode (links look like `/about` rather than `#/about`
 
 ### How to Get Started
 
