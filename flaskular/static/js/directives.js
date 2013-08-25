@@ -10,6 +10,7 @@ angular.module('Flaskular.directives', [])
     };
   }])
   .directive('navTabs', ['$location', function(location) {
+      //Taken from http://plnkr.co/edit/xwGtGqrT7kWoCKnGDHYN?p=preview
     return {
         restrict: 'A',
         link: function(scope, element) {
