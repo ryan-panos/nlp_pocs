@@ -1,50 +1,42 @@
 import os
 import json
-import argparse
+from opster import command, dispatch
 import requests
 
 from flaskular.core import db
-from flaskular.models import Post
+
 
 def create_sample_db_entry(api_endpoint, payload):
-	url = 'http://localhost:8000/' + api_endpoint
-	r = requests.post(url, data=json.dumps(payload), headers={'Content-Type': 'application/json'})
-	print r.text
-	
+    url = 'http://localhost:8000/' + api_endpoint
+    r = requests.post(url, data=json.dumps(payload),
+                      headers={'Content-Type': 'application/json'})
+    print r.text
+
+
+@command()
 def create_db():
-	db.create_all()
+    db.create_all()
+    print "DB created!"
 
+
+@command()
 def drop_db():
-	db.drop_all()
+    db.drop_all()
+    print "DB deleted!"
 
-def main():
-	parser = argparse.ArgumentParser(description='Manage this Flask application.')
-	parser.add_argument('command', help='the name of the command you want to run')
-	parser.add_argument('--seedfile', help='the file with data for seeding the database')
-	args = parser.parse_args()
 
-	if args.command == 'create_db':
-		create_db()
+@command()
+def seed_db(seedfile):
+    with open(seedfile, 'r') as f:
+        seed_data = json.loads(f.read())
+    for item_class in seed_data:
+        items = seed_data[item_class]
+        print items
+        for item in items:
+            print item
+            create_sample_db_entry('api/' + item_class, item)
+    print "\nSample data added to database!"
 
-		print "DB created!"
-	elif args.command == 'delete_db':
-		drop_db()
-
-		print "DB deleted!"
-	elif args.command == 'seed_db' and args.seedfile:
-		with open(args.seedfile, 'r') as f:
-			seed_data = json.loads(f.read())
-		
-		for item_class in seed_data:
-			items = seed_data[item_class]
-			print items
-			for item in items:
-				print item
-				create_sample_db_entry('api/' + item_class, item)
-
-		print "\nSample data added to database!"
-	else:
-		raise Exception('Invalid command')
 
 if __name__ == '__main__':
-	main()
+    dispatch()
