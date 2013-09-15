@@ -14,10 +14,20 @@ angular.module('Flaskular.controllers', [])
 angular.module('Flaskular.controllers', ['Flaskular.services'])
     .controller('PeopleCtrl', ['$scope', '$log', 'Person',
         function ($scope, $log, Person) {
+            var update = function () {
+                Person.query({}, function(result) {
+                    $scope.people = result.objects;
+                });
+            };
+
             $log.info("Querying people");
-            $scope.$log = $log;
-            $log.info(Object.keys(Person.query({},function(result) {
-                $scope.people = result.objects;
-            })));
+            update();
+
+            $scope.save = function() {
+                $log.info("Adding: ", $scope.search);
+                var newper = new Person({'name': $scope.search});
+                newper.$save();
+                update();
+            };
         }
-    ]);
+                              ]);

@@ -13,7 +13,7 @@ from flaskular.core import api_manager
 
 for model_name, model_class in app.config['API_MODELS'].items():
     app.logger.debug("Registering api for %s", model_class)
-    api_manager.create_api(model_class)
+    api_manager.create_api(model_class, methods=['GET', 'POST', 'DELETE'])
 
 
 session = api_manager.session
