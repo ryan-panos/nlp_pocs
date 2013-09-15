@@ -28,6 +28,7 @@ I've been removing those.
 2. install all the necessary packages (best done inside of a virtual environment)
 
         pip install -r requirements.txt
+        pip install -e ./
         npm install karma
         npm install karma-ng-scenario
         npm install karma-junit-reporter
