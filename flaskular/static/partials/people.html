@@ -1,0 +1,21 @@
+<section>
+  <h2>People</h2>
+  <input type="text" ng-model="search" class="search-query" placeholder="Search">
+  <table class="table table-hover">
+    <thead>
+      <th>Name</th>
+      <th>Games Recorded</th>
+      <th>First Seen</th>
+      <th>Last Seen</th>
+
+    </thead>
+    <tbody>
+      <tr ng-repeat="person in people | filter:search">
+        <td>{{person.name}}</td>
+        <td></td>
+        <td>{{person.date_entered}}</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</section>

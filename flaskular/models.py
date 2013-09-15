@@ -35,7 +35,7 @@ class Game(DateEnteredMixin, db.Model):
 
 
 # models for which we want to create API endpoints
-app.config['API_MODELS'] = {}
+app.config['API_MODELS'] = {'person': Person}
 
 
 # models for which we want to create CRUD-style URL endpoints,

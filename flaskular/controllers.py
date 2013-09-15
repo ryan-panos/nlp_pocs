@@ -11,9 +11,10 @@ from flaskular import app
 from flaskular.core import api_manager
 
 
-for model_name in app.config['API_MODELS']:
-    model_class = app.config['API_MODELS'][model_name]
-    api_manager.create_api(model_class, methods=['GET', 'POST'])
+for model_name, model_class in app.config['API_MODELS'].items():
+    app.logger.debug("Registering api for %s", model_class)
+    api_manager.create_api(model_class)
+
 
 session = api_manager.session
 
@@ -22,6 +23,7 @@ session = api_manager.session
 @app.route('/')
 @app.route('/about')
 @app.route('/contact')
+@app.route('/people')
 def basic_pages(**kwargs):
     return send_file('static/index.html')
 
