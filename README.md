@@ -45,4 +45,5 @@ I've been removing those.
 
 ### Running the tests
 
-Need to make sure the flask server is running. And then run either `scripts/test.sh` or `scripts/e2e-test.sh`.
+Need to make sure the flask server is running. And then run either
+`scripts/test.sh` or `scripts/e2e-test.sh`.
