@@ -1,3 +1,6 @@
+# Deprecated
+*This probably isn't the right way to go. I started this before I learned yeoman and much about bower et. al.*
+
 # Flaskular
 
 My stab at combining Angular and Flask. This is based originally on
