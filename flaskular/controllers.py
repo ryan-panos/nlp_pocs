@@ -62,8 +62,9 @@ def test_ibm(**kwargs):
 
     callStart = datetime.datetime.now()
     ## GOING TO EVENTUALLY GO THROUGH CALLING FUNCs!
-    result = give_all_nlp("A test string of greatness")
-    print "-----> Call took: " + str((datetime.datetime.now()).total_seconds() - callStart)
+    mWatson = MonitorWatsonAPI()
+    result = mWatson.give_all_nlp("A test string of greatness")
+    print "-----> Call took: " + str((datetime.datetime.now() - callStart).total_seconds())
 
     return json.dumps(result)
 

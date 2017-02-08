@@ -1,3 +1,37 @@
 {{ test_str }}
 
-<h3>{{ big_res }}</h3>
+<h5>{{ big_res }}</h5>
+
+
+<div class="one-response">
+    <div class="origial-text" >
+        Original Text:{{ big_res['orginal_text'] }}
+    </div>
+    <div class="response-text" >
+        docSentiment:{{ big_res['full_response']['docSentiment'] }}
+    </div>
+    <div class="response-text" >
+        taxonomy:{{ big_res['full_response']['taxonomy'] }}
+    </div>
+    <div class="response-text" >
+        docEmotions:{{ big_res['full_response']['docEmotions'] }}
+    </div>
+    <div class="response-text" >
+        keywords:{{ big_res['full_response']['keywords'] }}
+    </div>
+    <div class="response-text" >
+        concepts:{{ big_res['full_response']['concepts'] }}
+    </div>
+    <div class="response-text" >
+        docEmotions:{{ big_res['full_response']['typedRelations'] }}
+    </div>
+    <div class="response-text" >
+        keywords:{{ big_res['full_response']['relations'] }}
+    </div>
+    <div class="response-text" >
+        concepts:{{ big_res['full_response']['entities'] }}
+    </div>
+
+
+
+</div>
