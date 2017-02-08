@@ -1,5 +1,6 @@
 import os
 import json
+import datetime
 
 from flask import Flask, request, Response
 from flask import render_template, url_for, redirect, send_from_directory
@@ -12,6 +13,7 @@ from flaskular import app
 # routing for API endpoints (generated from the models designated as
 # API_MODELS)
 from flaskular.core import api_manager
+from flaskular.watson import *
 
 
 for model_name, model_class in app.config['API_MODELS'].items():
@@ -34,14 +36,17 @@ def basic_pages(**kwargs):
 
 @app.route('/api/testIBM')
 def test_ibm(**kwargs):
+
+
+
     input_file = DEFAULT_INPUT
 
-    # parser = reqparse.RequestParser()
-    # parser.add_argument('input_file', location='args', required=False)
-    # args = parser.parse_args()
-    #
-    # if args['input_file'] is None or len(args['input_file']) == 1:
-    #     input_file = DEFAULT_INPUT
+    parser = reqparse.RequestParser()
+    parser.add_argument('input_file', location='args', required=False)
+    args = parser.parse_args()
+
+    if args['input_file'] is not None and len(args['input_file']) > 0:
+        input_file = args['input_file']
 
     print " testIBM . . .... "
 
@@ -53,7 +58,13 @@ def test_ibm(**kwargs):
     result = {
         'escalate': 'True',
         'NYES!!': 'PART!'
-              }
+    }
+
+    callStart = datetime.datetime.now()
+    ## GOING TO EVENTUALLY GO THROUGH CALLING FUNCs!
+    result = give_all_nlp("A test string of greatness")
+    print "-----> Call took: " + str((datetime.datetime.now()).total_seconds() - callStart)
+
     return json.dumps(result)
 
 
@@ -87,3 +98,7 @@ def favicon():
 @app.errorhandler(404)
 def page_not_found(e):
     return send_file('static/index.html'), 404
+
+
+
+

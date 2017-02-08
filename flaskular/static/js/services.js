@@ -23,7 +23,7 @@ angular.module('Flaskular.services', ['ngResource'])
 
 angular.module('Flaskular.services', ['ngResource'])
     .factory('TestIBMService', function($resource) {
-        return $resource('/api/testIBM/', {}, {
+        return $resource('/api/testIBM/?input_file=test.csv', {}, {
             query: {
                 method: 'GET',
                 params: {  },  // personId: ''
