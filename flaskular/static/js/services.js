@@ -19,3 +19,17 @@ angular.module('Flaskular.services', ['ngResource'])
             }
         });
     });
+
+
+angular.module('Flaskular.services', ['ngResource'])
+    .factory('TestIBMService', function($resource) {
+        return $resource('/api/testIBM/', {}, {
+            query: {
+                method: 'GET',
+                params: {  },  // personId: ''
+                isArray: false
+            }
+        });
+    });
+
+console.log(">   LOADING!!! TestIBMService!! ");

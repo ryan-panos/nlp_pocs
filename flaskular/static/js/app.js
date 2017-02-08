@@ -19,6 +19,14 @@ angular.module('Flaskular', ['Flaskular.filters',
                  $routeProvider.when('/people', {
                      templateUrl: 'static/partials/people.html',
                      controller: 'PeopleCtrl'});
+
+
+                 $routeProvider.when('/ibm', {
+                     templateUrl: 'static/partials/ibm.html',
+                     controller: 'IbmCtrl'});
+
+
+
                  $routeProvider.when('/404', {
                      templateUrl: 'static/partials/404.html',
                      controller: 'FourOhFourCtrl'});
