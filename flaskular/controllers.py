@@ -38,8 +38,6 @@ def basic_pages(**kwargs):
 @app.route('/api/testIBM')
 def test_ibm(**kwargs):
 
-
-
     input_file = DEFAULT_INPUT
 
     parser = reqparse.RequestParser()

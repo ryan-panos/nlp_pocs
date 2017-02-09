@@ -3,7 +3,8 @@ from watson_developer_cloud import AlchemyLanguageV1
 import datetime
 
 class MonitorWatsonAPI():
-    API_KEY = "e581d5843a8e54af4a0b04ab2619cccde2dae747"
+    API_KEY = "d764df8cc016116fe8d2559e52a7474dab6103d4"
+    TECH_ADMIN_API_KEY = "e581d5843a8e54af4a0b04ab2619cccde2dae747"
     OLD_RP_API_KEY = "c4eee5a628ea2243350787a04b924bb21ecb6f7e"
     BEN_API_KEY = "b8db92daa6a6ca79bb61c0938babe873de0ed914"
     DO_NOT_CALL = False
@@ -48,33 +49,165 @@ class MonitorWatsonAPI():
         return return_data
 
 
+
+    def get_ibm_authors(self, txt_str):
+        if self.DO_NOT_CALL == True:
+            return "POS"
+
+        auth_resp = self.alchemy_handle.authors(text=txt_str)
+
+        print " >>> CALLED IBM - auth_resp: " + str(auth_resp)
+        return json.dumps(auth_resp)
+
+    def get_ibm_concepts(self, txt_str):
+        if self.DO_NOT_CALL == True:
+            return "POS"
+
+        concepts_resp = self.alchemy_handle.concepts(text=txt_str)
+
+        print " >>> CALLED IBM - concepts_resp: " + str(concepts_resp)
+        return json.dumps(concepts_resp)
+
+    def get_ibm_dates(self, txt_str):
+        if self.DO_NOT_CALL == True:
+            return "POS"
+
+        dates_resp = self.alchemy_handle.dates(text=txt_str)
+
+        print " >>> CALLED IBM - dates_resp: " + str(dates_resp)
+        return json.dumps(dates_resp)
+
+
+    def get_ibm_emotion(self, txt_str):
+        if self.DO_NOT_CALL == True:
+            return "POS"
+
+        emotion_resp = self.alchemy_handle.emotion(text=txt_str)
+
+        print " >>> CALLED IBM - emotion_resp: " + str(emotion_resp)
+        return json.dumps(emotion_resp)
+
+    def get_ibm_entities(self, txt_str):
+        if self.DO_NOT_CALL == True:
+            return "POS"
+
+        entities_resp = self.alchemy_handle.entities(text=txt_str)
+
+        print " >>> CALLED IBM - entities_resp: " + str(entities_resp)
+        return json.dumps(entities_resp)
+
+    def get_ibm_feeds(self, txt_str):
+        if self.DO_NOT_CALL == True:
+            return "POS"
+
+        feeds_resp = self.alchemy_handle.feeds(text=txt_str)
+
+        print " >>> CALLED IBM - feeds_resp: " + str(feeds_resp)
+        return json.dumps(feeds_resp)
+
+    ###
+    def get_ibm_keywords(self, txt_str):
+        if self.DO_NOT_CALL == True:
+            return "POS"
+
+        keywords_resp = self.alchemy_handle.keywords(text=txt_str)
+
+        print " >>> CALLED IBM - keywords_resp: " + str(keywords_resp)
+        return json.dumps(keywords_resp)
+
+    def get_ibm_language(self, txt_str):
+        if self.DO_NOT_CALL == True:
+            return "POS"
+
+        language_resp = self.alchemy_handle.language(text=txt_str)
+
+        print " >>> CALLED IBM - language_resp: " + str(language_resp)
+        return json.dumps(language_resp)
+
+
+    def get_ibm_microformats(self, txt_str):
+        if self.DO_NOT_CALL == True:
+            return "POS"
+
+            microformats_resp = self.alchemy_handle.microformats(text=txt_str)
+
+        print " >>> CALLED IBM - microformats_resp: " + str(microformats_resp)
+        return json.dumps(microformats_resp)
+
+    def get_ibm_publication_date(self, txt_str):
+        if self.DO_NOT_CALL == True:
+            return "POS"
+
+        publication_date_resp = self.alchemy_handle.publication_date(text=txt_str)
+
+        print " >>> CALLED IBM - publication_date_resp: " + str(publication_date_resp)
+        return json.dumps(publication_date_resp)
+
+    def get_ibm_relations(self, txt_str):
+        if self.DO_NOT_CALL == True:
+            return "POS"
+
+        relations_resp = self.alchemy_handle.relations(text=txt_str)
+
+        print " >>> CALLED IBM - relations_resp: " + str(relations_resp)
+        return json.dumps(relations_resp)
+
+    ##
+    def get_ibm_typed_relations(self, txt_str):
+        if self.DO_NOT_CALL == True:
+            return "POS"
+
+        typed_relations_resp = self.alchemy_handle.typed_relations(text=txt_str)
+
+        print " >>> CALLED IBM - typed_relations_resp: " + str(typed_relations_resp)
+        return json.dumps(typed_relations_resp)
+
     def get_ibm_sentiment(self, txt_str):
-      if self.DO_NOT_CALL == True:
-          return "POS"
+        if self.DO_NOT_CALL == True:
+            return "POS"
 
-      alchemy_language = AlchemyLanguageV1(api_key=MonitorWatsonAPI.API_KEY)
-      sent_resp = alchemy_language.sentiment(text=txt_str)
-      print(json.dumps(
-          sent_resp,
-        indent=2))  # indent??
+        sentiment_resp = self.alchemy_handle.sentiment(text=txt_str)
 
-      print " >>> CALLED IBM - sent_resp: " + str(sent_resp)
-      return sent_resp
+        print " >>> CALLED IBM - sentiment_resp: " + str(sentiment_resp)
+        return json.dumps(sentiment_resp)
 
 
-    # def get_ibm_sentiment(txt_str):
-    #   if DO_NOT_CALL == True:
-    #       return "Phil"
+    # Todo note the second param required!
+    def get_ibm_targeted_sentiment(self, txt_str, targeted_sentiment_resp_ls):
+        if self.DO_NOT_CALL == True:
+            return "POS"
+
+        targeted_sentiment_resp = self.alchemy_handle.targeted_sentiment(text=txt_str, targets=targeted_sentiment_resp_ls)
+
+        print " >>> CALLED IBM - targeted_sentiment_resp: " + str(targeted_sentiment_resp)
+        return json.dumps(targeted_sentiment_resp)
+
+    def get_ibm_taxonomy(self, txt_str):
+        if self.DO_NOT_CALL == True:
+            return "POS"
+
+        taxonomy_resp = self.alchemy_handle.taxonomy(text=txt_str)
+
+        print " >>> CALLED IBM - taxonomy_resp: " + str(taxonomy_resp)
+        return json.dumps(taxonomy_resp)
+
+    def get_ibm_title(self, txt_str):
+        if self.DO_NOT_CALL == True:
+            return "POS"
+
+        title_resp = self.alchemy_handle.title(text=txt_str)
+
+        print " >>> CALLED IBM - feeds_resp: " + str(title_resp)
+        return json.dumps(title_resp)
+
+    # def get_ibm_sentiment(self, txt_str):
+    #     if self.DO_NOT_CALL == True:
+    #         return "POS"
     #
-    #   alchemy_language = AlchemyLanguageV1(api_key=API_KEY)
-    #   print(json.dumps(
-    #       alchemy_language.entities(
-    #           text=txt_str),
-    #       indent=2))  # indent??
+    #     sent_resp = self.alchemy_handle.sentiment(text=txt_str)
     #
-    #   return alchemy_language.entities(text=txt_str)
-
-
+    #     print " >>> CALLED IBM - sent_resp: " + str(sent_resp)
+    #     return json.dumps(sent_resp)
 
 
 
@@ -118,4 +251,13 @@ alchemy_language = AlchemyLanguageV1(api_key="b8db92daa6a6ca79bb61c0938babe873de
   "note": "It may take up to 5 minutes for this key to become active",
   "apikey": "e581d5843a8e54af4a0b04ab2619cccde2dae747"
 }
+
+
+    # HANNAH ACCOUNT!!
+{
+  "url": "https://gateway-a.watsonplatform.net/calls",
+  "apikey": "d764df8cc016116fe8d2559e52a7474dab6103d4",
+  "note": "It may take up to 5 minutes for this key to become active"
+}
+
 '''
