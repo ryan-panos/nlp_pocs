@@ -27,7 +27,7 @@ angular.module('Flaskular.services', ['ngResource'])
             query: {
                 method: 'GET',
                 params: {  },  // personId: ''
-                isArray: false
+                isArray: true
             }
         });
     });

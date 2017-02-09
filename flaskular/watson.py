@@ -1,6 +1,6 @@
 import json
 from watson_developer_cloud import AlchemyLanguageV1
-
+import datetime
 
 class MonitorWatsonAPI():
     API_KEY = "e581d5843a8e54af4a0b04ab2619cccde2dae747"
@@ -12,14 +12,15 @@ class MonitorWatsonAPI():
         self.alchemy_handle = AlchemyLanguageV1(api_key=MonitorWatsonAPI.API_KEY)
 
     def give_all_nlp(self, content_txt):
+        callStart = datetime.datetime.now()
         return_data={
             "orginal_text":content_txt
         }
 
-        sent = self.get_ibm_sentiment(content_txt)
-        # Check for error?
-        if sent is not None:
-            return_data['sentiment'] = sent
+        # sent = self.get_ibm_sentiment(content_txt)
+        # # Check for error?
+        # if sent is not None:
+        #     return_data['sentiment'] = sent
 
         # alchemy_language = AlchemyLanguageV1(api_key=API_KEY)
         # return_data['sentiment'] = alchemy_language.sentiment(text=content_txt)
@@ -41,6 +42,8 @@ class MonitorWatsonAPI():
         #   max_items	    integer	The maximum number of results to return for each applicable extract operation
         #   showSourceText	integer	Set this to 1 to include the source text in the response
         #
+        resp_time = (datetime.datetime.now() - callStart).total_seconds()
+        return_data['resp_time'] = resp_time
 
         return return_data
 

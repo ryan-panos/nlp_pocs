@@ -1,9 +1,12 @@
 {{ test_str }}
 
-<h5>{{ big_res }}</h5>
 
 
-<div class="one-response">
+
+<div class="one-response" ng-repeat="big_res in big_res_ls">
+    <div class="origial-text" >
+        Response Time:{{ big_res['resp_time'] }}
+    </div>
     <div class="origial-text" >
         Original Text:{{ big_res['orginal_text'] }}
     </div>

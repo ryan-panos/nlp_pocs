@@ -1,12 +1,11 @@
 
 import csv
 
-def get_all_vendor_responses(input_file, output_file, vendor_func):
+def get_all_vendor_responses(input_file, vendor_func):
 
     # f = open(output_file, 'wt')
     input_path_file = "data/" + input_file
-
-    vendor_response = {}
+    vendor_response = []
 
     try:
         # writer = csv.writer(f)
@@ -33,11 +32,14 @@ def get_all_vendor_responses(input_file, output_file, vendor_func):
                     # row.append(sum_sentances)
                     # writer.writerow(row)
 
-                    vendor_response = vendor_func(row[content_idx])
+                    one_resp = vendor_func(row[content_idx])
+                    print "Got one response: " + str(one_resp)
+                    vendor_response.append(one_resp)
 
                 else:
                     print "%% ERR: content column not detected - could it be marked differently?"
 
     finally:
+        print "RETURNING a list " + str(len(vendor_response)) + " long with members like: " + str(vendor_response[0])
         return vendor_response
         # f.close()

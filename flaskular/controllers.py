@@ -14,6 +14,7 @@ from flaskular import app
 # API_MODELS)
 from flaskular.core import api_manager
 from flaskular.watson import *
+from flaskular.calling_funcs import *
 
 
 for model_name, model_class in app.config['API_MODELS'].items():
@@ -60,10 +61,15 @@ def test_ibm(**kwargs):
         'NYES!!': 'PART!'
     }
 
+    input_file = "sumy_text2_sh.csv"
+
     callStart = datetime.datetime.now()
     ## GOING TO EVENTUALLY GO THROUGH CALLING FUNCs!
     mWatson = MonitorWatsonAPI()
-    result = mWatson.give_all_nlp("A test string of greatness")
+    # result = mWatson.give_all_nlp("A test string of greatness")
+
+    result = get_all_vendor_responses(input_file, mWatson.give_all_nlp)
+
     print "-----> Call took: " + str((datetime.datetime.now() - callStart).total_seconds())
 
     return json.dumps(result)

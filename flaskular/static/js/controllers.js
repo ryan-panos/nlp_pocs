@@ -44,10 +44,10 @@ angular.module('Flaskular.controllers', ['Flaskular.services'])
 
                     console.log(" >> GOT BACK: ", result);
 
-                    $scope.big_res = result;
-                    $scope.orginal_text = result["orginal_text"];
+                    $scope.big_res_ls = result;
+                    // $scope.orginal_text = result["orginal_text"];
 
-                    console.log(" >> $scope.big_res: ", $scope.big_res);
+                    console.log(" >> $scope.big_res: ", $scope.big_res_ls);
                 });
             };
 
