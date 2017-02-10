@@ -42,7 +42,10 @@ def test_ibm(**kwargs):
 
     parser = reqparse.RequestParser()
     parser.add_argument('input_file', location='args', required=False)
+    parser.add_argument('is_many', location='args', required=False)
     args = parser.parse_args()
+
+    print " ------------>>>> args: " + str(args)
 
     if args['input_file'] is not None and len(args['input_file']) > 0:
         input_file = args['input_file']
@@ -51,14 +54,6 @@ def test_ibm(**kwargs):
 
     ## make calls here and return a huge dict
 
-    # return send_file('static/test_poc.html')
-    # return render_template('static/test_poc.html', input_file=input_file)
-
-    result = {
-        'escalate': 'True',
-        'NYES!!': 'PART!'
-    }
-
     input_file = "sumy_text2_sh.csv"
 
     callStart = datetime.datetime.now()
@@ -66,7 +61,31 @@ def test_ibm(**kwargs):
     mWatson = MonitorWatsonAPI()
     # result = mWatson.give_all_nlp("A test string of greatness")
 
-    result = get_all_vendor_responses(input_file, mWatson.give_all_nlp)
+    if args['is_many'] is not None:
+        print ">=============> args['is_many'] == " + str(args['is_many']) + " so doing MANY! "
+        result = {"resp_time" : "Joy!"}
+
+        # result[] = mWatson.get_ibm_service( "sentace about trump that sucks " , emotion)
+
+        # mWatson.get_ibm_service_by_tag( txt_str, "emotion")
+
+        result = get_a_series_of_calls(input_file, ["emotion", "concepts", "dates", "entities", "keywords",
+                            "language", "relations", "sentiment",
+                                    "taxonomy", "typed_relations"], mWatson.get_ibm_service_by_tag)
+
+        # THE ODD CALLS!   "feeds" microformats publication_date
+        # publication_date() got an unexpected keyword argument 'text'
+        '''
+        microformats, title - only html and url
+
+        '''
+
+
+
+
+    else:
+
+        result = get_all_vendor_responses(input_file, mWatson.give_all_nlp)
 
     print "-----> Call took: " + str((datetime.datetime.now() - callStart).total_seconds())
 

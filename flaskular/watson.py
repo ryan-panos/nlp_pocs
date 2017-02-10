@@ -48,15 +48,87 @@ class MonitorWatsonAPI():
 
         return return_data
 
+    def get_ibm_service_by_tag(self, txt_str, ibm_str):
 
+        print "~~~~~~~~~~~~~~~~~~~~~~~~~~~ going to get_ibm_service_by_tag: " + str(ibm_str)
+
+        if ibm_str == "authors":
+            return self.get_ibm_service(txt_str, self.alchemy_handle.authors)
+        elif ibm_str == "concepts":
+            return self.get_ibm_service(txt_str, self.alchemy_handle.concepts)
+        elif ibm_str == "dates":
+            return self.get_ibm_service(txt_str, self.alchemy_handle.dates)
+        elif ibm_str == "emotion":
+            return self.get_ibm_service(txt_str, self.alchemy_handle.emotion)
+        elif ibm_str == "entities":
+            return self.get_ibm_service(txt_str, self.alchemy_handle.entities)
+        elif ibm_str == "feeds":
+            return self.get_ibm_service(txt_str, self.alchemy_handle.feeds)
+        elif ibm_str == "keywords":
+            return self.get_ibm_service(txt_str, self.alchemy_handle.keywords)
+        elif ibm_str == "language":
+            return self.get_ibm_service(txt_str, self.alchemy_handle.language)
+        elif ibm_str == "microformats":
+            return self.get_ibm_service(txt_str, self.alchemy_handle.microformats)
+        elif ibm_str == "publication_date":
+            return self.get_ibm_service(txt_str, self.alchemy_handle.publication_date)
+        elif ibm_str == "relations":
+            return self.get_ibm_service(txt_str, self.alchemy_handle.relations)
+        elif ibm_str == "sentiment":
+            return self.get_ibm_service(txt_str, self.alchemy_handle.sentiment)
+        elif ibm_str == "taxonomy":
+            return self.get_ibm_service(txt_str, self.alchemy_handle.taxonomy)
+        elif ibm_str == "title":
+            return self.get_ibm_service(txt_str, self.alchemy_handle.title)
+        elif ibm_str == "typed_relations":
+            return self.get_ibm_service(txt_str, self.alchemy_handle.typed_relations)
+
+
+    def get_ibm_service(self, txt_str, ibm_func):
+        if self.DO_NOT_CALL == True:
+            return "POS"
+        callStart = datetime.datetime.now()
+        resp = {"return_data": ibm_func(text=txt_str)}
+
+        # print " >>> CALLED IBM - resp: " + str(resp)
+
+        resp_time = (datetime.datetime.now() - callStart).total_seconds()
+        resp['resp_time'] = resp_time
+        return resp
+
+
+
+    # Todo note the second param required!
+    def get_ibm_targeted_sentiment(self, txt_str, targeted_sentiment_resp_ls):
+        if self.DO_NOT_CALL == True:
+            return "POS"
+
+        targeted_sentiment_resp = self.alchemy_handle.targeted_sentiment(text=txt_str, targets=targeted_sentiment_resp_ls)
+
+        print " >>> CALLED IBM - targeted_sentiment_resp: " + str(targeted_sentiment_resp)
+        return json.dumps(targeted_sentiment_resp)
+
+
+
+    def get_ibm_typed_relations(self, txt_str):
+        if self.DO_NOT_CALL == True:
+            return "POS"
+
+        typed_relations_resp = self.alchemy_handle.typed_relations(text=txt_str)
+
+        print " >>> CALLED IBM - typed_relations_resp: " + str(typed_relations_resp)
+        return json.dumps(typed_relations_resp)
 
     def get_ibm_authors(self, txt_str):
         if self.DO_NOT_CALL == True:
             return "POS"
-
-        auth_resp = self.alchemy_handle.authors(text=txt_str)
+        callStart = datetime.datetime.now()
+        auth_resp = {'data': self.alchemy_handle.authors(text=txt_str)}
 
         print " >>> CALLED IBM - auth_resp: " + str(auth_resp)
+
+        resp_time = (datetime.datetime.now() - callStart).total_seconds()
+        auth_resp['resp_time'] = resp_time
         return json.dumps(auth_resp)
 
     def get_ibm_concepts(self, txt_str):
@@ -152,15 +224,9 @@ class MonitorWatsonAPI():
         print " >>> CALLED IBM - relations_resp: " + str(relations_resp)
         return json.dumps(relations_resp)
 
+
     ##
-    def get_ibm_typed_relations(self, txt_str):
-        if self.DO_NOT_CALL == True:
-            return "POS"
 
-        typed_relations_resp = self.alchemy_handle.typed_relations(text=txt_str)
-
-        print " >>> CALLED IBM - typed_relations_resp: " + str(typed_relations_resp)
-        return json.dumps(typed_relations_resp)
 
     def get_ibm_sentiment(self, txt_str):
         if self.DO_NOT_CALL == True:
@@ -172,15 +238,7 @@ class MonitorWatsonAPI():
         return json.dumps(sentiment_resp)
 
 
-    # Todo note the second param required!
-    def get_ibm_targeted_sentiment(self, txt_str, targeted_sentiment_resp_ls):
-        if self.DO_NOT_CALL == True:
-            return "POS"
 
-        targeted_sentiment_resp = self.alchemy_handle.targeted_sentiment(text=txt_str, targets=targeted_sentiment_resp_ls)
-
-        print " >>> CALLED IBM - targeted_sentiment_resp: " + str(targeted_sentiment_resp)
-        return json.dumps(targeted_sentiment_resp)
 
     def get_ibm_taxonomy(self, txt_str):
         if self.DO_NOT_CALL == True:
@@ -221,7 +279,8 @@ Services available - Per IBM Rep (Jacob Ellison <jellison@us.ibm.com>):
     Relation Extraction (RelEx) - Available as a Watson API under the AlchemyLanguage service
     Named Entity Recognition (NER) - Available as a Watson API under the AlchemyLanguage service
     Named Entity Disambiguation (NED) - Included in the results of NER API Calls.
-    Topic Extraction (TopEx) - Taxonomy, Concept Tagging and Keyword Extraction with relevance scores, all available under the AlchemyLanguage service are probably the closest proxy to Topic Extraction.
+    Topic Extraction (TopEx) - Taxonomy, Concept Tagging and Keyword Extraction with relevance scores,
+       all available under the AlchemyLanguage service are probably the closest proxy to Topic Extraction.
 
     Paragraph Splitting (PSplit) - Not available
     Co-reference Resolution (CoRef) - Not available

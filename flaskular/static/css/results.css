@@ -1,5 +1,11 @@
 
 
+
+.blinking-cursor {
+    width: 20px;
+    height: 20px;
+}
+
 .one-response {
     width: 100%;
     margin: 25px;
@@ -19,3 +25,13 @@
     width: 100%;
     line-height: 24px;
 }
+
+.response-text  .resp-time {
+    color: red;
+}
+
+.response-text  .service-name {
+    color: blue;
+    font-weight: 700;
+}
+
