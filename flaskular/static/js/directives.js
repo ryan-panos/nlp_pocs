@@ -3,7 +3,7 @@
 /* Directives */
 
 
-angular.module('Flaskular.directives', [])
+angular.module('nlpPOCs.directives', [])
     // .directive('appVersion', ['version', function(version) {
     //     return function(scope, elm, attrs) {
     //         elm.text(version);

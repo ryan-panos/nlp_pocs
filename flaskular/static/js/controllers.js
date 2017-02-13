@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-angular.module('Flaskular.controllers', [])
+angular.module('nlpPOCs.controllers', [])
     .controller('HomeCtrl', [
         function() { }])
     .controller('ContactCtrl', [
@@ -12,7 +12,7 @@ angular.module('Flaskular.controllers', [])
 
 console.log(" LOADING!!! IbmCtrl!! ");
 
-angular.module('Flaskular.controllers', ['Flaskular.services'])
+angular.module('nlpPOCs.controllers', ['nlpPOCs.services'])
     .controller('PeopleCtrl', ['$scope', '$log', 'Person',
         function ($scope, $log, Person) {
             var update = function () {
@@ -35,7 +35,7 @@ angular.module('Flaskular.controllers', ['Flaskular.services'])
         }
                               ]);
 
-angular.module('Flaskular.controllers', ['Flaskular.services'])
+angular.module('nlpPOCs.controllers', ['nlpPOCs.services'])
     .controller('IbmCtrl', ['$scope', '$log', 'TestIBMService',
         function ($scope, $log, TestIBMService) {
             $scope.ALL = "All";
@@ -53,9 +53,17 @@ angular.module('Flaskular.controllers', ['Flaskular.services'])
 
             $scope.inputFiles = [$scope.DEFAULT_FILE, $scope.ENV_FILE_10, $scope.ENV_FILE_1238];
 
+            $scope.hiddenSources = [];  //  probably need to initiate min length
 
             console.log("INIT-ish selectedMode: ", $scope.selectedMode);
 
+            $scope.hideSource = function (idx) {
+                $scope.hiddenSources[idx] = true;
+            };
+
+            $scope.showSource = function (idx) {
+                $scope.hiddenSources[idx] = undefined;
+            };
 
             $scope.onModeChange = function () {
                 console.log("onModeChange selectedMode: ", $scope.selectedMode);
@@ -120,7 +128,7 @@ angular.module('Flaskular.controllers', ['Flaskular.services'])
             var getMany = function () {
 
                 // TODO: maybe remove last?
-                
+
                 TestIBMService.queryMany({new_param: "bob", input_file: $scope.sentInputFile}, function(result) {
 
                     // console.log(" >> GOT BACK: ", result);
@@ -150,7 +158,6 @@ angular.module('Flaskular.controllers', ['Flaskular.services'])
 
             $log.info("testing IBM! (this is init like . ...) ");
             updatePage()
-
 
         }
                               ]);

@@ -1,4 +1,4 @@
-{{ mode_str }}
+<p>{{ mode_str }}</p>
 
 
 <select ng-model="selectedMode" ng-options="x for x in modes" ng-change="onModeChange()">
@@ -15,8 +15,11 @@
         <div class="origial-text" >
             Response Time:{{ big_res['resp_time'] }}
         </div>
-        <div class="origial-text" >
-            Original Text:{{ big_res['orginal_text'] }}
+        <div class="origial-text" ng-show="!hiddenSources[$index]">
+            <span ng-click="hideSource($index)" class="small-click show-hide">Hide Original</span> Original Text:{{ big_res['orginal_text'] }}
+        </div>
+        <div class="origial-text" ng-show="hiddenSources[$index]">
+            <span class="show-hide" ng-click="showSource($index)">Show Original</span>
         </div>
         <div class="response-text" >
             docSentiment:{{ big_res['full_response']['docSentiment'] }}
@@ -47,8 +50,12 @@
 
 <div ng-show="selectedMode=='Many'">
     <div class="one-response" ng-repeat="big_res in big_res_ls">
-
-
+        <div class="origial-text" ng-show="hiddenSources[$index]">
+            <span class="show-hide" ng-click="showSource($index)">Show Original</span>
+        </div>
+        <div class="origial-text" ng-show="!hiddenSources[$index]">
+            <span ng-click="hideSource($index)" class="small-click show-hide">Hide Original</span> Original Text:{{ big_res['orginal_text'] }}
+        </div>
         <div class="response-text" >
             <span class="resp-time">{{ big_res['authors']['resp_time'] }}</span>
                 <span class="service-name">authors:</span>{{ big_res['authors']['return_data'] }}

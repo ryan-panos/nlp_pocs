@@ -33,7 +33,9 @@ def get_a_series_of_calls(input_file, service_ls, get_service_by_tag):
                     # sum_sentances = get_sumy_response(row[content_idx])
                     # row.append(sum_sentances)
                     # writer.writerow(row)
-                    one_resp = {}
+                    one_resp = {
+                        "orginal_text": row[content_idx]
+                    }
                     for service_str in service_ls:
                         print "----------service_str---------:" + service_str
                         one_resp[service_str]=get_service_by_tag(row[content_idx], service_str)

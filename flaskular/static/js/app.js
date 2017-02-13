@@ -2,10 +2,10 @@
 
 
 // Declare app level module which depends on filters, and services
-angular.module('Flaskular', ['Flaskular.filters',
-                             'Flaskular.services',
-                             'Flaskular.directives',
-                             'Flaskular.controllers'])
+angular.module('nlpPOCs', ['nlpPOCs.filters',
+                             'nlpPOCs.services',
+                             'nlpPOCs.directives',
+                             'nlpPOCs.controllers'])
     .config(['$routeProvider', '$locationProvider',
              function($routeProvider, $locationProvider) {
                  $routeProvider.when('/', {

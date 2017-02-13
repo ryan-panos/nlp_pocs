@@ -52,6 +52,8 @@ def test_ibm(**kwargs):
     if args['input_file'] is not None and len(args['input_file']) > 0:
         print " FOUND input_file:" + args['input_file'] + "|"
         input_file = args['input_file']
+    else:
+        print " Sticking w defaul input file: " + str(input_file)
 
     print " testIBM . . .... "
 
@@ -92,6 +94,8 @@ def test_ibm(**kwargs):
         result = get_a_series_of_calls(input_file, ["emotion", "concepts", "dates", "entities", "keywords",
                             "language", "relations", "sentiment",
                                     "taxonomy", "typed_relations"], mWatson.get_ibm_service_by_tag)
+
+
 
         # THE ODD CALLS!   "feeds" microformats publication_date
         # publication_date() got an unexpected keyword argument 'text'
