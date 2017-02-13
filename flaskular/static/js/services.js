@@ -33,6 +33,11 @@ angular.module('Flaskular.services', ['ngResource'])
                 method: 'GET',
                 params: { is_many: "True" },  // personId: ''
                 isArray: true
+            },
+            queryTarget: {
+                method: 'GET',
+                params: { is_target: "True" },  // personId: ''
+                isArray: true
             }
         });
     });

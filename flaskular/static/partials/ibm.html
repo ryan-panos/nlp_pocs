@@ -3,6 +3,8 @@
 
 <select ng-model="selectedMode" ng-options="x for x in modes" ng-change="onModeChange()">
 </select>
+<select ng-model="selectedFile" ng-options="x for x in inputFiles" ng-change="onFileChange()">
+</select>
 
 <div class="loading-status">
     {{ loading_status }}
