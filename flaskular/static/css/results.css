@@ -34,6 +34,8 @@
 .one-response .response-text {
     width: 100%;
     line-height: 24px;
+
+    padding: 10px;
 }
 
 .response-text  .resp-time {

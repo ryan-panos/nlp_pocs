@@ -72,14 +72,25 @@ def test_ibm(**kwargs):
 
         # mWatson.get_ibm_service_by_tag( txt_str, "emotion")
 
-        result = get_a_series_of_calls(input_file, ["emotion", "concepts", "dates", "entities", "keywords",
+        result = get_a_series_of_calls(input_file, ["author", "emotion", "concepts", "dates", "entities", "keywords",
                             "language", "relations", "sentiment",
                                     "taxonomy", "typed_relations"], mWatson.get_ibm_service_by_tag)
 
-        # THE ODD CALLS!   "feeds" microformats publication_date
-        # publication_date() got an unexpected keyword argument 'text'
+        # No response thus far
+        # author
+        # microformats
+
+        # Todo Services
+        # Targeted Emotion - COMING SOON!
+
         '''
-        microformats, title - only html and url
+        publication_date, microformats, title, text(cleaned) and text(raw) - only html and url!!
+
+        feeds SAYS in API that text should work but does not!
+
+        TODO: targeted_sentiment
+        ADDED PARAM REQUIRED: <targets	list>	List of target phrases. The service will return sentiment information
+                            for each phrase that is found in the source text. Supports up to 20 phrases.
 
         '''
 
@@ -94,6 +105,8 @@ def test_ibm(**kwargs):
         result = get_a_series_of_calls(input_file, ["emotion", "concepts", "dates", "entities", "keywords",
                             "language", "relations", "sentiment",
                                     "taxonomy", "typed_relations"], mWatson.get_ibm_service_by_tag)
+
+
 
 
 
