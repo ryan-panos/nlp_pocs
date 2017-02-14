@@ -3,12 +3,12 @@
 /* Directives */
 
 
-angular.module('Flaskular.directives', [])
-    .directive('appVersion', ['version', function(version) {
-        return function(scope, elm, attrs) {
-            elm.text(version);
-        };
-    }])
+angular.module('nlpPOCs.directives', [])
+    // .directive('appVersion', ['version', function(version) {
+    //     return function(scope, elm, attrs) {
+    //         elm.text(version);
+    //     };
+    // }])
     .directive('navTabs', ['$location', function(location) {
         //Taken from http://plnkr.co/edit/xwGtGqrT7kWoCKnGDHYN?p=preview
         return {

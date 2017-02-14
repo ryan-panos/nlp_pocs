@@ -1,0 +1,49 @@
+
+
+
+.blinking-cursor {
+    width: 20px;
+    height: 20px;
+}
+
+.small-click {
+    font-size: 12px;
+}
+
+.show-hide {
+    font-size: 12px;
+    color: blueviolet;
+    font-weight: 800;
+}
+
+.one-response {
+    width: 100%;
+    margin: 25px;
+}
+
+.one-response div {
+    border: red solid 1px;
+}
+
+.one-response .origial-text {
+    width: 100%;
+    line-height: 22px;
+    font-size: 18px;
+}
+
+.one-response .response-text {
+    width: 100%;
+    line-height: 24px;
+
+    padding: 10px;
+}
+
+.response-text  .resp-time {
+    color: red;
+}
+
+.response-text  .service-name {
+    color: blue;
+    font-weight: 700;
+}
+

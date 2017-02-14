@@ -1,0 +1,132 @@
+<p>{{ mode_str }}</p>
+
+
+<select ng-model="selectedMode" ng-options="x for x in modes" ng-change="onModeChange()">
+</select>
+<select ng-model="selectedFile" ng-options="x for x in inputFiles" ng-change="onFileChange()">
+</select>
+
+<div class="loading-status">
+    {{ loading_status }}
+</div>
+
+<div ng-show="selectedMode=='All'">
+    <div class="one-response" ng-repeat="big_res in big_res_ls">
+        <div class="origial-text" >
+            Response Time:{{ big_res['resp_time'] }}
+        </div>
+        <div class="origial-text" ng-show="!hiddenSources[$index]">
+            <span ng-click="hideSource($index)" class="small-click show-hide">Hide Original</span> Original Text:{{ big_res['orginal_text'] }}
+        </div>
+        <div class="origial-text" ng-show="hiddenSources[$index]">
+            <span class="show-hide" ng-click="showSource($index)">Show Original</span>
+        </div>
+        <div class="response-text" >
+            docSentiment:{{ big_res['full_response']['docSentiment'] }}
+        </div>
+        <div class="response-text" >
+            taxonomy:{{ big_res['full_response']['taxonomy'] }}
+        </div>
+        <div class="response-text" >
+            docEmotions:{{ big_res['full_response']['docEmotions'] }}
+        </div>
+        <div class="response-text" >
+            keywords:{{ big_res['full_response']['keywords'] }}
+        </div>
+        <div class="response-text" >
+            concepts:{{ big_res['full_response']['concepts'] }}
+        </div>
+        <div class="response-text" >
+            docEmotions:{{ big_res['full_response']['typedRelations'] }}
+        </div>
+        <div class="response-text" >
+            keywords:{{ big_res['full_response']['relations'] }}
+        </div>
+        <div class="response-text" >
+            concepts:{{ big_res['full_response']['entities'] }}
+        </div>
+    </div>
+</div>
+
+<div ng-show="selectedMode=='Many'">
+    <div class="one-response" ng-repeat="big_res in big_res_ls">
+        <div class="origial-text" ng-show="hiddenSources[$index]">
+            <span class="show-hide" ng-click="showSource($index)">Show Original</span>
+        </div>
+        <div class="origial-text" ng-show="!hiddenSources[$index]">
+            <span ng-click="hideSource($index)" class="small-click show-hide">Hide Original</span> Original Text:{{ big_res['orginal_text'] }}
+        </div>
+        <div class="response-text" >
+            <span class="resp-time">{{ big_res['authors']['resp_time'] }}</span>
+                <span class="service-name">authors:</span>{{ big_res['authors']['return_data'] }}
+        </div>
+        <div class="response-text" >
+            <span class="resp-time">{{ big_res['concepts']['resp_time'] }}</span>
+                <span class="service-name">concepts:</span>{{ big_res['concepts']['return_data'] }}
+        </div>
+        <div class="response-text" >
+            <span class="resp-time">{{ big_res['dates']['resp_time'] }}</span>
+                <span class="service-name">dates:</span>{{ big_res['dates']['return_data'] }}
+        </div>
+
+        <div class="response-text" >
+            <span class="resp-time">{{ big_res['emotion']['resp_time'] }}</span>
+                <span class="service-name">emotion:</span>{{ big_res['emotion']['return_data'] }}
+        </div>
+        <div class="response-text" >
+            <span class="resp-time">{{ big_res['entities']['resp_time'] }}</span>
+                <span class="service-name">entities:</span>{{ big_res['entities']['return_data'] }}
+        </div>
+        <div class="response-text" >
+            <span class="resp-time">{{ big_res['feeds']['resp_time'] }}</span>
+                <span class="service-name">feeds:</span>{{ big_res['feeds']['return_data'] }}
+        </div>
+
+
+        <div class="response-text" >
+            <span class="resp-time">{{ big_res['keywords']['resp_time'] }}</span>
+                <span class="service-name">keywords:</span>{{ big_res['keywords']['return_data'] }}
+        </div>
+        <div class="response-text" >
+            <span class="resp-time">{{ big_res['language']['resp_time'] }}</span>
+                <span class="service-name">language:</span>{{ big_res['language']['return_data'] }}
+        </div>
+        <div class="response-text" >
+            <span class="resp-time">{{ big_res['microformats']['resp_time'] }}</span>
+                <span class="service-name">microformats:</span>{{ big_res['microformats']['return_data'] }}
+        </div>
+        <div class="response-text" >
+            <span class="resp-time">{{ big_res['publication_date']['resp_time'] }}</span>
+                <span class="service-name">publication_date:</span>{{ big_res['publication_date']['return_data'] }}
+        </div>
+        <div class="response-text" >
+            <span class="resp-time">{{ big_res['relations']['resp_time'] }}</span>
+                <span class="service-name">relations:</span>{{ big_res['relations']['return_data'] }}
+        </div>
+        <div class="response-text" >
+            <span class="resp-time">{{ big_res['sentiment']['resp_time'] }}</span>
+                <span class="service-name">sentiment:</span>{{ big_res['sentiment']['return_data'] }}
+        </div>
+
+        <div class="response-text" >
+            <span class="resp-time">{{ big_res['taxonomy']['resp_time'] }}</span>
+                <span class="service-name">taxonomy:</span>{{ big_res['taxonomy']['return_data'] }}
+        </div>
+        <div class="response-text" >
+            <span class="resp-time">{{ big_res['title']['resp_time'] }}</span>
+                <span class="service-name">title:</span>{{ big_res['title']['return_data'] }}
+        </div>
+        <div class="response-text" >
+            <span class="resp-time">{{ big_res['typed_relations']['resp_time'] }}</span>
+                <span class="service-name">typed_relations:</span>{{ big_res['typed_relations']['return_data'] }}
+        </div>
+    </div>
+
+
+
+
+</div>
+
+<div ng-show="selectedMode=='Other'">
+    <h3> We dont really have an OTHER yet . . so that's nice. </h3>
+</div>
