@@ -1,28 +1,7 @@
-# Deprecated
-*This probably isn't the right way to go. I started this before I learned yeoman and much about bower et. al.*
-
-# Flaskular
-
-My stab at combining Angular and Flask. This is based originally on
-https://github.com/rxl/angular-flask. It's been:
-
-* Updated with more recent angular-seed.
-* Scripts are in the scripts folder
-* includes testing config (fixed from angular-seed)
-* setup.py for this project
-
-It still contains some bits of the blog demo project that he made; but
-I've been removing those.
+# NLP PoCs
+These scripts are designed to demostrate both the quality and speed of the responses from the NLP vendors currently under review.
 
 
-## What's included
-
-* Flask
-* Flask-SQLAlchemy
-* Bootstrap 3
-* flask-restless
-* Angular (from angular-seed)
-** HTML5 mode (links look like `/about` rather than `#/about`
 
 ### How to Get Started
 
@@ -30,6 +9,7 @@ I've been removing those.
 
 2. install all the necessary packages (best done inside of a virtual environment)
 
+        (possible start and execute a virtualenv)
         pip install -r requirements.txt
         pip install -e ./
         npm install karma
@@ -39,12 +19,18 @@ I've been removing those.
 3. run the app
 
         runserver.py
+        
+4. check out the site: http://localhost:8000/
+        
 
-4. create and seed the db (the server must still be running, so open a new terminal window first)
+
+### Steps to be considered in the future - we are currently not utlizing a DB
+
+5. create and seed the db (the server must still be running, so open a new terminal window first)
 
         python manage.py create_db && python manage.py seed_db --seedfile 'data/db_items.json'
 
-5. check out the site: http://localhost:8000/
+
 
 ### Running the tests
 
