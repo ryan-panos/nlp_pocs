@@ -16,9 +16,9 @@ These scripts are designed to demostrate both the quality and speed of the respo
         npm install karma-ng-scenario
         npm install karma-junit-reporter
 
-3. run the app
+3. run the app (from project root dir)
 
-        runserver.py
+        ./scripts/runserver.py
         
 4. check out the site: http://localhost:8000/
         
