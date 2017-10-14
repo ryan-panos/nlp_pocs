@@ -163,7 +163,7 @@ class MonitorWatsonAPI():
         if self.DO_NOT_CALL == True:
             return "POS"
 
-        entities_resp = self.alchemy_handle.entities(text=txt_str)
+        entities_resp = self.alchemy_handle.entities(text=txt_str, sentiment=1)
 
         print " >>> CALLED IBM - entities_resp: " + str(entities_resp)
         return json.dumps(entities_resp)

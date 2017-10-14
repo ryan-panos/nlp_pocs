@@ -30,8 +30,6 @@ angular.module('nlpPOCs.controllers', ['nlpPOCs.services'])
                 newper.$save();
                 update();
             };
-
-
         }
                               ]);
 
@@ -49,11 +47,17 @@ angular.module('nlpPOCs.controllers', ['nlpPOCs.services'])
             $scope.DEFAULT_FILE = '<short default file>';
             $scope.ENV_FILE_10 = 'dataset_934_env_short.csv';
             $scope.ENV_FILE_1238 = 'dataset_840_env1.csv';
+            $scope.TEST_NLP = 'test_nlp.csv';
             $scope.selectedFile = $scope.DEFAULT_FILE;
 
-            $scope.inputFiles = [$scope.DEFAULT_FILE, $scope.ENV_FILE_10, $scope.ENV_FILE_1238];
+            $scope.inputFiles = [$scope.DEFAULT_FILE, $scope.ENV_FILE_10, $scope.ENV_FILE_1238, $scope.TEST_NLP];
 
             $scope.hiddenSources = [];  //  probably need to initiate min length
+
+            $scope.IBM = "IBM";
+            $scope.BASIS = "Basis";
+            $scope.vendorOptions = [$scope.IBM, $scope.BASIS];
+            $scope.selectedVendor = $scope.IBM;
 
             console.log("INIT-ish selectedMode: ", $scope.selectedMode);
 
@@ -67,20 +71,24 @@ angular.module('nlpPOCs.controllers', ['nlpPOCs.services'])
 
             $scope.onModeChange = function () {
                 console.log("onModeChange selectedMode: ", $scope.selectedMode);
-
-                // if ($scope.selectedMode == $scope.ALL) {
-                //
-                // } else if ($scope.selectedMode == $scope.MANY) {
-                //
-                // } else {
-                //
-                // }
-
                 updatePage();
             };
 
+            $scope.onReLoad = function () {
+                updatePage();
+            }
+
             $scope.onFileChange = function () {
                 console.log("onFileChange selectedFile: ", $scope.selectedFile);
+                updatePage();
+            };
+
+            $scope.onVendorChange = function () {
+                console.log("-- onVendorChange selectedVendor: ", $scope.selectedVendor);
+                if ($scope.selectedVendor == $scope.BASIS) {
+                    $scope.selectedMode = $scope.MANY;
+                    $scope.mode_str = "No All mode for Basis (that we know of) so doing many . . ..";
+                }
                 updatePage();
             };
 
@@ -93,18 +101,18 @@ angular.module('nlpPOCs.controllers', ['nlpPOCs.services'])
                 }
 
                 if (!$scope.selectedMode || $scope.selectedMode == $scope.ALL ) {
-                    $scope.mode_str = " Annnnd DOING Allll of IBM at once!! ";
-                    $scope.loading_status = 'Calling IBM . ..';
+                    $scope.mode_str = " Annnnd DOING Allll of " + $scope.selectedVendor + " at once!! ";
+                    $scope.loading_status = 'Calling ' + $scope.selectedVendor + ' . ..';
                     //.<img class="blinking-cursor" src="static/img/blinking-cursor.gif-c200"/>
                     getAll();
                 } else if ($scope.selectedMode == $scope.MANY) {
-                    $scope.mode_str = " Annnnd DOING IBM in chunks ! ";
-                    $scope.loading_status = 'Calling IBM . ...';
+                    $scope.mode_str = " Annnnd DOING " + $scope.selectedVendor + " in chunks ! ";
+                    $scope.loading_status = 'Calling ' + $scope.selectedVendor + ' . ...';
                     // <img class="blinking-cursor" src="static/img/blinking-cursor.gif-c200"/>
                     getMany();
                 } else if ($scope.selectedMode == $scope.TARGET) {
-                    $scope.mode_str = " Annnnd DOING the IBM services we are targeting ! ";
-                    $scope.loading_status = 'Calling IBM . ...';
+                    $scope.mode_str = " Annnnd DOING the " + $scope.selectedVendor + " services we are targeting ! ";
+                    $scope.loading_status = 'Calling ' + $scope.selectedVendor + ' . ...';
                     // <img class="blinking-cursor" src="static/img/blinking-cursor.gif-c200"/>
                     getMany();//todo !!!
                 }
@@ -113,13 +121,15 @@ angular.module('nlpPOCs.controllers', ['nlpPOCs.services'])
 
                 // TODO: maybe remove last?
 
-                TestIBMService.queryAll({input_file: $scope.sentInputFile}, function(result) {
+                TestIBMService.queryAll({input_file: $scope.sentInputFile, selected_vendor: $scope.selectedVendor}, function(result) {
 
                     console.log(" >> GOT BACK: ", result);
 
                     $scope.big_res_ls = result;
                     $scope.loading_status = "";
-                    // $scope.orginal_text = result["orginal_text"];
+                    if (result["selected_vendor"]) {
+                        $scope.selected_vendor = result["selected_vendor"];
+                    }
 
                     console.log(" >> $scope.big_res: ", $scope.big_res_ls);
                 });
@@ -129,13 +139,13 @@ angular.module('nlpPOCs.controllers', ['nlpPOCs.services'])
 
                 // TODO: maybe remove last?
 
-                TestIBMService.queryMany({new_param: "bob", input_file: $scope.sentInputFile}, function(result) {
-
-                    // console.log(" >> GOT BACK: ", result);
+                TestIBMService.queryMany({selected_vendor: $scope.selectedVendor, input_file: $scope.sentInputFile}, function(result) {
 
                     $scope.big_res_ls = result;
                     $scope.loading_status = "";
-                    // $scope.orginal_text = result["orginal_text"];
+                    if (result["selected_vendor"]) {
+                        $scope.selected_vendor = result["selected_vendor"];
+                    }
 
                     console.log(" >> $scope.big_res: ", $scope.big_res_ls);
                     // console.log(" >> $scope.big_res[0]: ", $scope.big_res_ls[0]);
@@ -143,21 +153,24 @@ angular.module('nlpPOCs.controllers', ['nlpPOCs.services'])
             };
 
             var getTarget = function () {
-                TestIBMService.queryTarget({}, function(result) {
+                TestIBMService.queryTarget({selected_vendor: $scope.selectedVendor, input_file: $scope.sentInputFile}, function(result) {
 
                     console.log(" >> GOT BACK: ", result);
 
                     $scope.big_res_ls = result;
                     $scope.loading_status = "";
-                    // $scope.orginal_text = result["orginal_text"];
+                    if (result["selected_vendor"]) {
+                        $scope.selected_vendor = result["selected_vendor"];
+                    }
 
                     console.log(" >> $scope.big_res: ", $scope.big_res_ls);
                 });
             };
 
 
-            $log.info("testing IBM! (this is init like . ...) ");
-            updatePage()
+            // $log.info("testing IBM! (this is init like . ...) ");
+            $log.info("waiting for a call . . . ");
+            // updatePage()
 
         }
                               ]);

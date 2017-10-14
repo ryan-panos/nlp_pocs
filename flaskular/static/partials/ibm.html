@@ -5,6 +5,9 @@
 </select>
 <select ng-model="selectedFile" ng-options="x for x in inputFiles" ng-change="onFileChange()">
 </select>
+<select ng-model="selectedVendor" ng-options="x for x in vendorOptions" ng-change="onVendorChange()">
+</select>
+<span  class="reload-button" ng-click="onReLoad()">RE-SEND</span>
 
 <div class="loading-status">
     {{ loading_status }}
@@ -49,6 +52,7 @@
 </div>
 
 <div ng-show="selectedMode=='Many'">
+    YES MANY
     <div class="one-response" ng-repeat="big_res in big_res_ls">
         <div class="origial-text" ng-show="hiddenSources[$index]">
             <span class="show-hide" ng-click="showSource($index)">Show Original</span>
@@ -100,14 +104,13 @@
                 <span class="service-name">publication_date:</span>{{ big_res['publication_date']['return_data'] }}
         </div>
         <div class="response-text" >
-            <span class="resp-time">{{ big_res['relations']['resp_time'] }}</span>
-                <span class="service-name">relations:</span>{{ big_res['relations']['return_data'] }}
+            <span class="resp-time">{{ big_res['relations']['resp_time'] }}{{ big_res['relationships']['resp_time'] }}</span>
+                <span class="service-name">relations:</span>{{ big_res['relations']['return_data'] }}{{ big_res['relationships']['return_data'] }}
         </div>
         <div class="response-text" >
             <span class="resp-time">{{ big_res['sentiment']['resp_time'] }}</span>
                 <span class="service-name">sentiment:</span>{{ big_res['sentiment']['return_data'] }}
         </div>
-
         <div class="response-text" >
             <span class="resp-time">{{ big_res['taxonomy']['resp_time'] }}</span>
                 <span class="service-name">taxonomy:</span>{{ big_res['taxonomy']['return_data'] }}
@@ -119,6 +122,18 @@
         <div class="response-text" >
             <span class="resp-time">{{ big_res['typed_relations']['resp_time'] }}</span>
                 <span class="service-name">typed_relations:</span>{{ big_res['typed_relations']['return_data'] }}
+        </div>
+        <div class="response-text" >
+            <span class="resp-time">{{ big_res['sentences']['resp_time'] }}</span>
+                <span class="service-name">sentences:</span>{{ big_res['sentences']['return_data'] }}
+        </div>
+        <div class="response-text" >
+            <span class="resp-time">{{ big_res['syntax_dependencies']['resp_time'] }}</span>
+                <span class="service-name">syntax_dependencies:</span>{{ big_res['syntax_dependencies']['return_data'] }}
+        </div>
+        <div class="response-text" >
+            <span class="resp-time">{{ big_res['tokens']['resp_time'] }}</span>
+                <span class="service-name">tokens:</span>{{ big_res['tokens']['return_data'] }}
         </div>
     </div>
 

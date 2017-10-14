@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+
+
+
+<div ng-hide="article.publisher=='Twitter'" class="ellipse-text monitor-article-grid-title">
+                    <strong ng-hide="article.title">
+                        <a href="{{ article.url }}"
+                           target="_blank"
+                            ng-show="article.url">[missing title]</a>
+                        <span ng-hide="article.url">[missing title]</span>
+                    </strong>
+                    <strong ng-show="article.title">
+                        <a href="{{ article.url }}"
+                           target="_blank"
+                           ng-bind="article.title"
+                            ng-show="article.url"></a>
+                        <span ng-hide="article.url">{{ article.title }}</span>
+
+                    </strong>
+                </div>
+                <div ng-show="article.publisher=='Twitter'" class="ellipse-text monitor-article-grid-title">
+                    <strong ng-hide="article.content">
+                        <a href="{{ article.url }}" ng-show="article.url"
+                           target="_blank">&nbsp</a>
+                        <span ng-hide="article.url">&nbsp</span>
+                    </strong>
+                    <strong ng-show="article.content">
+                        <a href="{{ article.url }}" ng-show="article.url"
+                           target="_blank"
+                           ng-bind-html="article.content"></a>
+                        <span ng-hide="article.url" ng-bind-html="article.content">&nbsp</span>
+                    </strong>
+                </div>
